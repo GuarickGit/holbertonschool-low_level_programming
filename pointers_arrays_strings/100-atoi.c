@@ -10,33 +10,24 @@
 
 int _atoi(char *s)
 {
-	int i = 0;
+	int i;
 	int result = 0;
 	int sign = 1;
 
-	/* Gestion des signes avant le nombre */
-	while (s[i] != '\0' && (s[i] < '0' || s[i] > '9'))
+	/* recherche du 1er chiffre et gestion des signes */
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		if (s[i] == '-')
+		if (s[i] == '-') /* si on trouve un '-', inverser le signe */
 			sign *= -1;
-			i++;
+		else if (s[i] >= '0' && s[i] <= '9') /* si on trouve un chiffre, break */
+			break;
 	}
-
-	/* Conversion des chiffres en entier */
-	while (s[i] >= '0' && s[i] <= '9')
+	/* conversion des chiffres en entier */
+	for (; s[i] >= '0' && s[i] <= '9'; i++)
 	{
-	/* Vérification de l'overflow */
-		if (result > (2147483647 - (s[i] - '0')) / 10)
-		{
-			if (sign == 1)
-				return (2147483647);  /* INT_MAX */
-			else
-				return (-2147483648); /* INT_MIN */
-		}
-
 		result = result * 10 + (s[i] - '0');
-		i++;
 	}
 
+	/* retourner le resultat avec le bon signe */
 	return (result * sign);
 }

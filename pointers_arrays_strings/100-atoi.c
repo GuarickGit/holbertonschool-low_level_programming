@@ -14,21 +14,29 @@ int _atoi(char *s)
 	int result = 0;
 	int sign = 1;
 
-	/* recherche du 1er chiffre et gestion des signes */
-	while (s[i] != '\0')
+	/* Gestion des signes avant le nombre */
+	while (s[i] != '\0' && (s[i] < '0' || s[i] > '9'))
 	{
-		if (s[i] == '-') /* si on trouve un '-', inverser le signe */
+		if (s[i] == '-')
 			sign *= -1;
-		else if (s[i] >= '0' && s[i] <= '9') /* si on trouve un chiffre, break */
-			break;
-		i++;
-	}
-	/* conversion des chiffres en entier */
-	for (; s[i] >= '0' && s[i] <= '9'; i++)
-	{
-		result = result * 10 + (s[i] - '0');
+			i++;
 	}
 
-	/* retourner le resultat avec le bon signe */
+	/* Conversion des chiffres en entier */
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+	/* Vérification de l'overflow */
+		if (result > (2147483647 - (s[i] - '0')) / 10)
+		{
+			if (sign == 1)
+				return (2147483647);  /* INT_MAX */
+			else
+				return (-2147483648); /* INT_MIN */
+		}
+
+		result = result * 10 + (s[i] - '0');
+		i++;
+	}
+
 	return (result * sign);
 }

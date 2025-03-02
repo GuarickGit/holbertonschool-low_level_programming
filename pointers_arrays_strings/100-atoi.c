@@ -1,4 +1,5 @@
 #include "main.h"
+#include <limits.h>  /* pour INT_MAX et INT_MIN */
 
 /**
  * _atoi - Converts a string to an integer
@@ -12,13 +13,12 @@ int _atoi(char *s)
 {
 	int result = 0;
 	int sign = 1;
-	int number_found = 0;
 
-	/* ignorer les espaces et caracteres de controle */
+	/* ignore les espaces et caractères de contrôle */
 	while (*s == ' ' || (*s >= 9 && *s <= 13))
 		s++;
 
-	/* gerer les signes */
+	/* gère les signes */
 	while (*s == '+' || *s == '-')
 	{
 		if (*s == '-')
@@ -29,14 +29,17 @@ int _atoi(char *s)
 	/* convertit les chiffres en entier */
 	while (*s >= '0' && *s <= '9')
 	{
+		/* vérifie si la multiplication entraînerait un overflow */
+		if (result > (INT_MAX - (*s - '0')) / 10)
+		{
+			/* overflow détecté */
+			return (sign == 1) ? INT_MAX : INT_MIN;
+		}
+
 		result = result * 10 + (*s - '0');
-		number_found = 1;
 		s++;
 	}
 
-	/* retourne le resultat avec le bon signe */
-	if (!number_found)
-		return 0;
-
+	/* retourne le résultat avec le bon signe */
 	return result * sign;
 }

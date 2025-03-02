@@ -10,24 +10,33 @@
 
 int _atoi(char *s)
 {
-	int i;
 	int result = 0;
 	int sign = 1;
+	int number_found = 0;
 
-	/* recherche du 1er chiffre et gestion des signes */
-	for (i = 0; s[i] != '\0'; i++)
+	/* ignorer les espaces et caracteres de controle */
+	while (*s == ' ' || (*s >= 9 && *s <= 13))
+		s++;
+
+	/* gerer les signes */
+	while (*s == '+' || *s == '-')
 	{
-		if (s[i] == '-') /* si on trouve un '-', inverser le signe */
+		if (*s == '-')
 			sign *= -1;
-		else if (s[i] >= '0' && s[i] <= '9') /* si on trouve un chiffre, break */
-			break;
-	}
-	/* conversion des chiffres en entier */
-	for (; s[i] >= '0' && s[i] <= '9'; i++)
-	{
-		result = result * 10 + (s[i] - '0');
+		s++;
 	}
 
-	/* retourner le resultat avec le bon signe */
-	return (result * sign);
+	/* convertit les chiffres en entier */
+	while (*s >= '0' && *s <= '9')
+	{
+		result = result * 10 + (*s - '0');
+		number_found = 1;
+		s++;
+	}
+
+	/* retourne le resultat avec le bon signe */
+	if (!number_found)
+		return 0;
+
+	return result * sign;
 }

@@ -11,7 +11,7 @@
 int _atoi(char *s)
 {
 	int i;
-	int result = 0;
+	unsigned int result = 0;
 	int sign = 1;
 
 	/* recherche du 1er chiffre et gestion des signes */

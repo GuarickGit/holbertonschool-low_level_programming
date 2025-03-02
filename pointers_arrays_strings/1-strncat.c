@@ -1,5 +1,17 @@
 #include "main.h"
 
+/**
+ * _strncat - concatenates two strings
+ *
+ * @dest: destination string
+ *
+ * @src: source string to be appended
+ *
+ * @n: maximum number
+ *
+ * Return: pointer to the result
+ */
+
 char *_strncat(char *dest, char *src, int n)
 {
 	int i = 0;

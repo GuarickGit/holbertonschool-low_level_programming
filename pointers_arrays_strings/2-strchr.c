@@ -21,6 +21,4 @@ char *_strchr(char *s, char c)
 	/* vérification si le caractère est '\0' */
 	if (c == '\0')
 		return (&s[i]); /* retourne le pointeur sur le caractère nul */
-
-	return (NULL); /* retourne NULL si 'c' n'est pas trouvé */
 }

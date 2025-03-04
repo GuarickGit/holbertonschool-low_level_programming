@@ -1,5 +1,13 @@
 #include "main.h"
 
+/**
+ * _strspn - get the length of a prefix substring
+ *
+ * @s:the input string to search
+ * @accept: the set of characters to match in s
+ *
+ * Return: The number of bytes in the initial segment of s from accept
+ */
 unsigned int _strspn(char *s, char *accept)
 {
 	int i;
@@ -26,5 +34,5 @@ unsigned int _strspn(char *s, char *accept)
 		counter++; /* on incrémente le compteur */
 	}
 
-	return counter; /* retourne le nombre de caractères trouvés */
+	return (counter); /* retourne le nombre de caractères trouvés */
 }

@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * print_chessboard - prints a chessboard
+ *
+ * @a: pointer to a 2D array of 8x8
+ */
 void print_chessboard(char (*a)[8])
 {
 	int row;

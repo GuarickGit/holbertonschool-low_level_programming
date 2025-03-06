@@ -11,6 +11,7 @@
  */
 int main(int argc, char *argv[])
 {
+	(void)argc; /* évite un avertissement si argc n'est pas utilisé */
 	printf("%s\n", argv[0]);
 	return (0);
 }

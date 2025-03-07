@@ -2,12 +2,6 @@
  * Declaration des fonctions
  */
 
-#ifndef MAIN_H
-#define MAIN_H
-
-#ifndef MAIN_H
-#define MAIN_H
-
 int _putchar (char c);
 void print_alphabet(void);
 void print_alphabet_x10(void);
@@ -66,8 +60,3 @@ int _sqrt_recursion(int n);
 int find_sqrt(int n, int x); /* fonction auxilliaire de _sqrt_recursion - ligne 62 */
 int is_prime_number(int n);
 int is_divisible(int n, int divisor); /* fonction auxilliaire de is_prime_number - ligne 64 */
-
-#endif /* MAIN_H */
-
-
-#endif /* MAIN_H */

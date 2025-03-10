@@ -63,3 +63,4 @@ int find_sqrt(int n, int x); /* fonction auxilliaire de _sqrt_recursion - ligne 
 int is_prime_number(int n);
 int is_divisible(int n, int divisor); /* fonction auxilliaire de is_prime_number - ligne 64 */
 char *create_array(unsigned int size, char c);
+char *_strdup(char *str);

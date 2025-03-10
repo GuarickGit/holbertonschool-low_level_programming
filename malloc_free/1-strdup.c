@@ -6,7 +6,7 @@
  * @str: string to duplicate
  *
  * Return: pointer to the duplicated string, or NULL if memory allocation
- * 			fails or if str is NULL
+ * fails or if str is NULL
  */
 
 char *_strdup(char *str)
@@ -16,7 +16,7 @@ char *_strdup(char *str)
 	char *arr;
 
 	/* vérifie si la chaîne reçue est NULL */
-	if (str == NULL)
+	if (str == 0)
 		return (NULL);
 
 	/* calcule la longueur de la chaîne (sans compter le '\0') */

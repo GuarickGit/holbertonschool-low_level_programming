@@ -16,7 +16,7 @@ void *malloc_checked(unsigned int b)
 	ptr = malloc(b); /* allocation dynamique de b octets avec malloc */
 
 	if (!ptr) /* vérification de l'allocation | similaire à ptr == NULL */
-		exit (98); /* si fail, arrêt du programme avec statut 98 */
+		exit(98); /* si fail, arrêt du programme avec statut 98 */
 
 	return (ptr); /* si succès, retourne l'adresse mémoire allouée */
 }

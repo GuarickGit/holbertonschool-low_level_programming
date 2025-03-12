@@ -1,5 +1,15 @@
 #include "main.h"
 
+/**
+ * string_nconcat - concatenates two strings up to n bytes from the 2nd string
+ * @s1: first string, treated as empty string if NULL
+ * @s2: second string to concatenate, treated as empty if NULL
+ * @n: maximum number of bytes from s2 to concatenate
+ *
+ * Return: pointer to the newly allocated string containing s1,
+ * followed by up to n bytes from s2, null-terminated
+ */
+
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
 	unsigned int i, j, k;
@@ -31,6 +41,7 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 
 		s3[i + n] = '\0';
 	}
+
 	else
 	{
 		s3 = malloc((i + j + 1) * sizeof(char));
@@ -46,5 +57,6 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 
 		s3[i + j] = '\0';
 	}
+
 	return (s3);
 }

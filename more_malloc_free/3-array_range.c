@@ -18,7 +18,8 @@ int *array_range(int min, int max)
 	if (min > max)
 		return (NULL);
 
-	/* alloue la mémoire pour le tableau */
+	/* alloue la mémoire pour le tableau,
+	 * (+1 pour inclure max, on ne veut pas la différence) */
 	arr = malloc((max - min + 1) * sizeof(int));
 
 	if (!arr)

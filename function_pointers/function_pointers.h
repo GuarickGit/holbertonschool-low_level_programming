@@ -1,10 +1,6 @@
 #ifndef FUNCTION_POINTERS_H
 #define FUNCTION_POINTERS_H
 
-/**
- * Declaration des fonctions
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>

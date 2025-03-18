@@ -1,5 +1,4 @@
 #include <string.h>
-#include "function_pointers.h"
 #include "calc.h"
 
 /**

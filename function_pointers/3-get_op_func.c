@@ -18,8 +18,7 @@ int (*get_op_func(char *s))(int, int)
 	int i = 0;
 
 	/* tableau contenant les opérateurs et les fonctions correspondantes */
-	op_t ops[] =
-	{
+	op_t ops[] = {
 		{"+", op_add},
 		{"-", op_sub},
 		{"*", op_mul},
@@ -30,15 +29,17 @@ int (*get_op_func(char *s))(int, int)
 
 	/*
 	 * parcourt le tableau `ops[]` pour trouver l'opérateur correspondant
- 	 * `ops[i].op != NULL` vérifie que l'on n'a pas atteint la fin du tableau
- 	 * `strcmp(s, ops[i].op) != 0` compare `s` avec l'opérateur dans `ops[i].op`
- 	 * si `strcmp()` return 0, donc `s` = à `ops[i].op`, fin de la boucle
- 	 * sinon, on continue à incrémenter `i` pour tester l'opérateur suivant.
- 	 */
+	 * `ops[i].op != NULL` vérifie que l'on n'a pas atteint la fin du tableau
+	 * `strcmp(s, ops[i].op) != 0` compare `s` avec l'opérateur dans `ops[i].op`
+	 * si `strcmp()` return 0, donc `s` = à `ops[i].op`, fin de la boucle
+	 * sinon, on continue à incrémenter `i` pour tester l'opérateur suivant.
+	*/
 	while (ops[i].op != NULL && strcmp(s, ops[i].op) != 0)
 		i++;
 
-	/* retourne la fonction associée si un opérateur est trouvé,
-	 * sinon retourne NULL */
+	/*
+	 * retourne la fonction associée si un opérateur est trouvé,
+	 * sinon retourne NULL
+	 */
 	return (ops[i].f);
 }

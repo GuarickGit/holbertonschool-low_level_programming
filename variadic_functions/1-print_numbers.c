@@ -30,11 +30,12 @@ void print_numbers(const char *separator, const unsigned int n, ...)
 		/* affichage du séparateur uniquement si ce n'est pas le dernier nombre */
 		if (separator != NULL && i < n - 1)
 		{
-			/* fermeture de la liste d'arguments variables */
 			printf("%s", separator);
 		}
 	}
 
 	printf("\n");
+	
+	/* fermeture de la liste d'arguments variables */
 	va_end(arguments);
 }

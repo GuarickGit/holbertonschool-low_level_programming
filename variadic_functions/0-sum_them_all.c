@@ -27,7 +27,7 @@ int sum_them_all(const unsigned int n, ...)
 	va_start(arguments, n);
 
 	/* boucle pour parcourir tous les arguments passés à la fonction */
-	for(i = 0; i < n; i++)
+	for (i = 0; i < n; i++)
 	{
 		/* va_arg récupère le prochain argument et l'ajoute à sum */
 		sum += va_arg(arguments, int);
@@ -37,5 +37,5 @@ int sum_them_all(const unsigned int n, ...)
 	va_end(arguments);
 
 	/* retourne la somme totale des arguments */
-	return(sum);
+	return (sum);
 }

@@ -51,14 +51,15 @@ void print_all(const char * const format, ...)
 	int i = 0;
 	int j;
 	const char *valids = "cifs";
-	void (*types[])(va_list) = {print_char, print_integer, print_float, print_string};
+	void (*types[])(va_list) = {
+		print_char, print_integer, print_float, print_string};
 	char *separator = "";
 
 	va_start(arguments, format);
 
 	while (format && format[i])
 	{
-		if(strchr(valids, format[i]))
+		if (strchr(valids, format[i]))
 		{
 			j = strchr(valids, format[i]) - valids;
 			printf("%s", separator);

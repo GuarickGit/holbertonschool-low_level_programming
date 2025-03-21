@@ -36,7 +36,7 @@ void print_float(va_list arguments)
  */
 void print_string(va_list arguments)
 {
-	/* èécupère une string (char *) */
+	/* récupère une string (char *) */
 	char *str = va_arg(arguments, char *);
 	/* si la string est NULL, on affiche (nil) */
 	if (!str)

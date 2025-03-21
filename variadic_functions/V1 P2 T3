@@ -1,0 +1,43 @@
+#include "variadic_functions.h"
+
+void print_all(const char * const format, ...)
+{
+	va_list arguments;
+	int i = 0;
+
+	va_start(arguments, format);
+
+	while (format[i] != '\0')
+	{
+		if (strchr("cifs", format[i]) != NULL)
+			{
+				if (format[i] == 'c')
+				{
+					char c = va_arg(arguments, int);
+					printf("%c", c);
+				}
+				else if (format[i] == 'i')
+				{
+					int d = va_arg(arguments, int);
+					printf("%d", d);
+				}
+				else if (format[i] == 'f')
+				{
+					double f = va_arg(arguments, float);
+					printf("%f", f);
+				}
+				else if (format[i] == 's')
+				{
+					char *s = va_arg(arguments, char *);
+					if (s == NULL)
+					{
+						printf("(nil)");
+					}
+					else
+						printf("%s", s);
+				}
+			}
+	}
+
+	va_end(arguments);
+}

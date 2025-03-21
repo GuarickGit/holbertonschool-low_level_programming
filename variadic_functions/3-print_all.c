@@ -52,32 +52,42 @@ void print_string(va_list arguments)
 void print_all(const char * const format, ...)
 {
 	va_list arguments; /* déclaration de la liste d'arguments variables */
-	int i = 0;
-	int index = 0;
-	const char *valids = "cifs";
-	void (*types[])(va_list) = {
+	int i = 0; /* index de la chaîne utilisé pour 'format' */
+	int index = 0; /* index dans la chaîne "cifs" */
+	const char *valids = "cifs"; /* types valides à reconnaître */
+	void (*types[])(va_list) = { /* tableau regroupant mes fonctions */
 		print_char, print_integer, print_float, print_string};
-	char *separator = "";
+	char *separator = ""; /* séparateur à afficher entre les valeurs */
 
+	/* initialisation de 'va_list' */
 	va_start(arguments, format);
 
-	while (format && format[i])
+	while (format && format[i]) /* parcours de la chaîne format */
 	{
-		index = 0;
+		index = 0; /* réinitialise index à chaque itération */
+
+		/* Recherche du type correspondant dans "cifs" */
+
+		/*
+		 * comparaison de `format[i]` à chaque caractère de `valids`
+		 * jusqu'à trouver un match ou arrivé à la fin.
+		 * Si trouvé, `index` contiendra la position correspondante
+		 * qui servira à appeler la bonne fonction via `types[index]`.
+		 */
 		while (valids[index] && format[i] != valids[index])
 		{
 			index++;
 		}
 
-		if (valids[index])
+		if (valids[index]) /* si le type est reconnu */
 		{
-			printf("%s", separator);
-			types[index](arguments);
-			separator = ", ";
+			printf("%s", separator); /* affiche le séparateur */
+			types[index](arguments); /* appelle la fonction associée au type */
+			separator = ", "; /* met à jour le séparateur pour les prochains */
 		}
-		i++;
+		i++; /* passe au caractère suivant du format */
 	}
 
 	printf("\n");
-	va_end(arguments);
+	va_end(arguments); /* libère la mémoire de la liste d'arguments */
 }

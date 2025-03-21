@@ -6,7 +6,8 @@
  */
 void print_char(va_list arguments)
 {
-	printf("%c", va_arg(arguments, int)); /* les Char deviennent des Int */
+	/* les char deviennent des int dans les fonctions variadiques */
+	printf("%c", va_arg(arguments, int));
 }
 
 /**
@@ -15,7 +16,8 @@ void print_char(va_list arguments)
  */
 void print_integer(va_list arguments)
 {
-	printf("%d", va_arg(arguments, int)); /* récupère un Int*/
+	/* récupère et affiche un int */
+	printf("%d", va_arg(arguments, int));
 }
 
 /**
@@ -24,7 +26,8 @@ void print_integer(va_list arguments)
  */
 void print_float(va_list arguments)
 {
-	printf("%f", va_arg(arguments, double)); /* les Float deviennent des Doubles*/
+	/* les floats deviennent des doubles dans les fonctions variadiques */
+	printf("%f", va_arg(arguments, double));
 }
 
 /**
@@ -33,9 +36,10 @@ void print_float(va_list arguments)
  */
 void print_string(va_list arguments)
 {
-	char *str = va_arg(arguments, char *); /* récupère un pointeur vers Char */
-
-	if (!str) /* si la string est NULL, on affiche (nil) */
+	/* èécupère une string (char *) */
+	char *str = va_arg(arguments, char *);
+	/* si la string est NULL, on affiche (nil) */
+	if (!str)
 		str = "(nil)";
 	printf("%s", str);
 }
@@ -47,9 +51,9 @@ void print_string(va_list arguments)
  */
 void print_all(const char * const format, ...)
 {
-	va_list arguments;
+	va_list arguments; /* déclaration de la liste d'arguments variables */
 	int i = 0;
-	int j;
+	int index = 0;
 	const char *valids = "cifs";
 	void (*types[])(va_list) = {
 		print_char, print_integer, print_float, print_string};
@@ -59,12 +63,16 @@ void print_all(const char * const format, ...)
 
 	while (format && format[i])
 	{
-		if (strchr(valids, format[i]))
+		index = 0;
+		while (valids[index] && format[i] != valids[index])
 		{
-			j = strchr(valids, format[i]) - valids;
-			printf("%s", separator);
-			types[j](arguments);
+			index++;
+		}
 
+		if (valids[index])
+		{
+			printf("%s", separator);
+			types[index](arguments);
 			separator = ", ";
 		}
 		i++;

@@ -13,7 +13,7 @@ dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
 	unsigned int count = 0;
 	dlistint_t *current = head;
 
-	/* On parcourt la liste tant qu'on n'est pas à la fin et que l'index n'est pas atteint */
+	/* On parcourt la liste complète et tant que l'index n'est pas atteint */
 	while (current != NULL && count < index)
 	{
 		current = current->next;

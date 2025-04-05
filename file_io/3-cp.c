@@ -106,13 +106,13 @@ int main(int argc, char *argv[])
 		/* Relit les 1024 prochains octets */
 		bytes_read = read(fd_from, buffer, 1024);
 	}
-	/* Vérifie si la dernière lecture a échoué */
-	if (bytes_read == -1)
+	if (bytes_read == -1) /* Vérifie si la dernière lecture a échoué */
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		safe_close(fd_from);
+		safe_close(fd_to);
 		exit(98);
 	}
-	/* Ferme les deux fichiers proprement */
 	safe_close(fd_from);
 	safe_close(fd_to);
 	return (0); /* Success */

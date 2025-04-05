@@ -80,7 +80,8 @@ int main(int argc, char *argv[])
 	int bytes_read, bytes_written;
 	char buffer[1024]; /* Tampon pour stocker les données lues */
 
-	if (argc != 3) /* Vérif que le programme a reçu exactement deux arguments */
+	/* Vérifie que le programme a bien reçu exactement deux arguments */
+	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
@@ -93,28 +94,27 @@ int main(int argc, char *argv[])
 	bytes_read = read(fd_from, buffer, 1024);
 	while (bytes_read > 0)
 	{
+		/* Écrit dans le fichier de destination */
 		bytes_written = write(fd_to, buffer, bytes_read);
 		/* Vérifie si l'écriture a échoué ou a été partielle */
 		if (bytes_written == -1 || bytes_written != bytes_read)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			safe_close(fd_from);
-			safe_close(fd_to);
+			close(fd_from);
 			exit(99);
 		}
-		bytes_read = read(fd_from, buffer, 1024); /* lit les 1024 prochains octets */
+		/* Relit les 1024 prochains octets */
+		bytes_read = read(fd_from, buffer, 1024);
 	}
+	/* Vérifie si la dernière lecture a échoué */
 	if (bytes_read == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		if (fd_from >= 0)
-			safe_close(fd_from);
-		if (fd_to >= 0)
-			safe_close(fd_to);
 		exit(98);
 	}
-	safe_close(fd_from); /* Ferme 'fd_from' proprement */
-	safe_close(fd_to); /* Ferme 'fd_to' proprement */
+	/* Ferme les deux fichiers proprement */
+	safe_close(fd_from);
+	safe_close(fd_to);
 	return (0); /* Success */
 }
 
@@ -125,4 +125,3 @@ int main(int argc, char *argv[])
  * C'est utile pour afficher les messages d'erreur même quand la sortie
  * normale est capturée.
  */
-

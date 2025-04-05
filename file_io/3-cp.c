@@ -93,7 +93,6 @@ int main(int argc, char *argv[])
 	bytes_read = read(fd_from, buffer, 1024);
 	while (bytes_read > 0)
 	{
-		/* Écrit dans le fichier de destination */
 		bytes_written = write(fd_to, buffer, bytes_read);
 		/* Vérifie si l'écriture a échoué ou a été partielle */
 		if (bytes_written == -1 || bytes_written != bytes_read)
@@ -103,14 +102,15 @@ int main(int argc, char *argv[])
 			safe_close(fd_to);
 			exit(99);
 		}
-		/* Relit les 1024 prochains octets */
-		bytes_read = read(fd_from, buffer, 1024);
+		bytes_read = read(fd_from, buffer, 1024); /* lit les 1024 prochains octets */
 	}
-	if (bytes_read == -1) /* Vérifie si la dernière lecture a échoué */
+	if (bytes_read == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		safe_close(fd_from);
-		safe_close(fd_to);
+		if (fd_from >= 0)
+			safe_close(fd_from);
+		if (fd_to >= 0)
+			safe_close(fd_to);
 		exit(98);
 	}
 	safe_close(fd_from); /* Ferme 'fd_from' proprement */

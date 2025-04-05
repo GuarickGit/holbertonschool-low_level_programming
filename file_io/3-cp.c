@@ -80,8 +80,7 @@ int main(int argc, char *argv[])
 	int bytes_read, bytes_written;
 	char buffer[1024]; /* Tampon pour stocker les données lues */
 
-	/* Vérifie que le programme a bien reçu exactement deux arguments */
-	if (argc != 3)
+	if (argc != 3) /* Vérif que le programme a reçu exactement deux arguments */
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
@@ -100,7 +99,8 @@ int main(int argc, char *argv[])
 		if (bytes_written == -1 || bytes_written != bytes_read)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			close(fd_from);
+			safe_close(fd_from);
+			safe_close(fd_to);
 			exit(99);
 		}
 		/* Relit les 1024 prochains octets */

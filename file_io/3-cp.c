@@ -31,18 +31,19 @@ int open_file_from(char *filename)
  */
 int open_file_to(char *filename)
 {
-	/*
-	 * Ouvre le fichier en écriture,
-	 * crée s'il n'existe pas,
-	 * et le vide s'il existe
-	 */
-	int fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	int fd;
 
-	/* Vérifie si l'ouverture ou la création a échoué */
+	/* Tente d'ouvrir le fichier sans O_CREAT d'abord */
+	fd = open(filename, O_WRONLY | O_TRUNC);
 	if (fd == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
-		exit(99);
+		/* Si le fichier n'existe pas, on le crée avec les permissions 0664 */
+		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+		if (fd == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
+			exit(99);
+		}
 	}
 
 	return (fd);
